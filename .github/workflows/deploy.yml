@@ -8,7 +8,7 @@ on:
 env:
   REGISTRY: ghcr.io
   # CAMBIA 'tu_usuario_github' por tu usuario real de GitHub en minúsculas
-  IMAGE_NAME: ghcr.io/ronalfcito_github/flask-app
+  IMAGE_NAME: ghcr.io/ronalfcito/flask-app
 
 jobs:
   build-and-push:
@@ -38,5 +38,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ env.IMAGE_NAME }}:1.0.0
+            ${{ env.IMAGE_NAME }}:2.0.0
             ${{ env.IMAGE_NAME }}:latest
