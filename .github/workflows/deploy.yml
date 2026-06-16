@@ -41,13 +41,13 @@ jobs:
             ${{ env.IMAGE_NAME }}:2.0.0
             ${{ env.IMAGE_NAME }}:latest
 
-      - name: "mostrar imagenes (SOLO locales , no secretos)"
+      - name: "mostrar datos de conexión (sin secretos sensibles)"
         run: |
-          echo "probando la coneción con SSH con:"
+          echo "probando la conexión con SSH con:"
           echo "Host: ${{ secrets.VPS_HOST }}"
           echo "usuario: ${{ secrets.VPS_USER }}"
-          echo "puerto: ${{ secrets.VPS_SSH_PORT }} 
-          echo "password: ${{ secrets.VPS_PASSWORD }}"
+          echo "puerto: ${{ secrets.VPS_SSH_PORT }}"
+          echo "password: [OCULTO POR SEGURIDAD]"
 
       - name: "probar conexión SSH al VPS"
         uses: appleboy/ssh-action@v1
@@ -57,10 +57,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
-            echo "probando la coneción con SSH EN EL VPN"
+            echo "probando la conexión con SSH EN EL VPS"
             hostname
             whoami
             uptime
-  
-
-        
