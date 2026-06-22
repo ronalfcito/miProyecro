@@ -59,4 +59,17 @@ jobs:
           script: |
             echo "probando la conexión con SSH EN EL VPS"
             touch quitoa.txt
-            
+      
+      - name: "pasar archivos desde git al vps"
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_SSH_PORT }}
+          source: "stack.yml"
+          target: "/home/{{ secrets.VPS_USER }}/landinga"
+
+        
+ 
+
