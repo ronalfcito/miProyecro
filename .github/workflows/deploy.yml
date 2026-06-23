@@ -81,13 +81,13 @@ jobs:
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
             echo " Desplegando servicios"
-            cd /home/${{ secrets.VPS_USER }}/despliegue
+            mkdir -p /home/${{ secrets.VPS_USER }}/despliegue
             
             echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            docker pull ghcr.io/ronaldfcito/flask-app:latest
+            docker pull ghcr.io/ronalfcito/flask-app:latest
+            docker compose -f stack.yml up -d
 
-            echo "==> Desplegando stack..."
-            docker stack deploy -c stack.yml flask_stack
+
             
 
             
