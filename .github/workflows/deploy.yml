@@ -68,6 +68,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_SSH_PORT }}
-          source: "stack.yml Makefile"
+          # Los archivos están dentro de la carpeta `app/` en este repositorio
+          source: "app/stack.yml app/Makefile"
           target: "/home/${{ secrets.VPS_USER }}/landinga"
 
