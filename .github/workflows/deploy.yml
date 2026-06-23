@@ -82,9 +82,5 @@ jobs:
           script: |
             echo " Desplegando servicios"
             docker login ghcr.io -u ronalfcito -p ${{ secrets.GHCR_PAT }}
+            docker pull ghcr.io/ronalfcito/flask-app:latest
             docker stack deploy -c /home/${{ secrets.VPS_USER }}/despliegue/app/stack.yml ronald
-
-
-            
-
-            
