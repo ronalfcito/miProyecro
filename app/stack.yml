@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   ronald:
-    image: ghcr.io/ronalfcito/ronald:1.0.0
+    image: ghcr.io/ronalfcito/flask-app:latest
     build:
       context: .
       dockerfile: Dockerfile
