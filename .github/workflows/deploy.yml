@@ -83,7 +83,7 @@ jobs:
             echo " Desplegando servicios"
             echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker pull ghcr.io/ronalfcito/flask-app:latest
-            docker compose -f /home/${{ secrets.VPS_USER }}/despliegue/app/stack.yml up -d
+            docker stack deploy -c /home/${{ secrets.VPS_USER }}/despliegue/app/stack.yml ronald
 
 
             

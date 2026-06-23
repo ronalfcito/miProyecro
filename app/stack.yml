@@ -18,11 +18,11 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.ronald.entrypoints=http"
-        - "traefik.http.routers.ronald.rule=Host(`ronald.byronrm.com`)"
+        - "traefik.http.routers.ronald.rule=Host(`ronald.byronnm.com`)"
         - "traefik.http.middlewares.ronald-https-redirect.redirectscheme.scheme=https"
         - "traefik.http.routers.ronald.middlewares=ronald-https-redirect"
         - "traefik.http.routers.ronald-secure.entrypoints=https"
-        - "traefik.http.routers.ronald-secure.rule=Host(`ronald.byronrm.com`)"
+        - "traefik.http.routers.ronald-secure.rule=Host(`ronald.byronnm.com`)"
         - "traefik.http.routers.ronald-secure.tls=true"
         - "traefik.http.routers.ronald-secure.tls.certresolver=http"
         - "traefik.http.routers.ronald-secure.service=ronald"
