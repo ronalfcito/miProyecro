@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     networks:
       - traefik-public
+    ports:
+      - "5000:5000"
     deploy:
       replicas: 1
       update_config:

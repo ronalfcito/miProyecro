@@ -1,4 +1,5 @@
 import os
+import time
 from flask import Flask, jsonify, render_template_string
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -20,6 +21,37 @@ def get_db_connection():
         user=DB_USER,
         password=DB_PASSWORD
     )
+
+
+def init_db():
+    for attempt in range(15):
+        try:
+            conn = get_db_connection()
+            with conn.cursor() as cur:
+                cur.execute("""
+                    CREATE TABLE IF NOT EXISTS productos (
+                        id SERIAL PRIMARY KEY,
+                        nombre VARCHAR(100) NOT NULL,
+                        precio NUMERIC(10,2) NOT NULL,
+                        stock INTEGER NOT NULL DEFAULT 0
+                    )
+                """)
+                cur.execute("""
+                    INSERT INTO productos (nombre, precio, stock)
+                    SELECT 'Producto de ejemplo', 19.99, 10
+                    WHERE NOT EXISTS (SELECT 1 FROM productos)
+                """)
+            conn.commit()
+            conn.close()
+            return
+        except Exception:
+            if attempt == 14:
+                raise
+            time.sleep(2)
+
+
+init_db()
+
 
 @app.route('/')
 def index():
