@@ -7,7 +7,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  # CAMBIA 'tu_usuario_github' por tu usuario real de GitHub en minúsculas
   IMAGE_NAME: ghcr.io/ronalfcito/flask-app
 
 jobs:
@@ -28,8 +27,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ronalfcito
+          password: ${{ secrets.GHCR_PAT }}   # a tu PAT aquí
 
       - name: Construir y publicar imagen Docker
         uses: docker/build-push-action@v5
@@ -58,8 +57,7 @@ jobs:
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
             echo "probando la conexión con SSH EN EL VPS"
-            touch quitoa.txt
-
+            touch despliegue.txt
 
       - name: "pasar archivos desde git al vps"
         uses: appleboy/scp-action@v1
@@ -70,7 +68,6 @@ jobs:
           port: ${{ secrets.VPS_SSH_PORT }}
           source: "app/stack.yml,app/Makefile"
           target: "/home/${{ secrets.VPS_USER }}/despliegue"
-
 
       - name: Despliegue de los servicios
         uses: appleboy/ssh-action@v1
